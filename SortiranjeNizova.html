@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Sortiranje Nizova</title>
+	
+	<style>
+		label {
+			display: inline-block;
+			width: 100px;
+			margin: 10px 10px;
+		}
+		
+		input {
+			width: 100px;
+			text-align: center;
+		}
+		
+		#nizSortirani {
+			background-color: yellow;
+		}
+	</style>
+</head>
+
+
+<body>
+
+	<form>
+		<label>Broj clanova</label>
+		<input type="text" name="brojClanova" id="brojClanova" value=20></br>
+		
+		<label>Raspon od</label>
+		<input type="text" name="rasponOd" id="rasponOd" value=1></br>
+
+		<label>Raspon do</label>
+		<input type="text" name="rasponDo" id="rasponDo" value=20></br>
+	</form>
+	
+	<button onclick="zamisliNiz()">Zamisli niz</button>
+	<button onclick="sortirajNiz()">Sortiraj niz</button>
+	<button onclick="jsSort()">jsSort</button>
+	<p id="verme"></p>
+	<p id="niz"></p>
+	<hr />
+	<p id="nizSortirani"></p>
+	<p id="brojaci"></p>
+
+
+<script>
+
+var brojClanova, rasponOd, rasponDo;
+var niz = [];
+
+function zamisliNiz() {
+	brojClanova = parseInt(document.getElementById("brojClanova").value);
+	rasponOd = parseInt(document.getElementById("rasponOd").value);
+	rasponDo = parseInt(document.getElementById("rasponDo").value);
+
+	niz = [];
+	for (var i=0; i < brojClanova; i++){
+		niz[i] = Math.floor(Math.random() * (rasponDo - rasponOd + 1)) + rasponOd;
+	}
+	document.getElementById("niz").innerHTML = niz.join("-");
+	
+	document.getElementById("nizSortirani").innerHTML = "";
+	document.getElementById("brojaci").innerHTML = "";
+	
+}
+
+function sortirajNiz() { // sort metodom brojanja
+	//var t1 = new Date();
+	var brojac = [];
+	
+	for (var i=0; i <= rasponDo; i++)
+		brojac[i] = 0;
+
+	for (var i=0; i < brojClanova; i++)
+		brojac[niz[i]]++;
+
+	var x = 0;
+	for (var i=0; i < brojac.length; i++){
+		for (var j=1; j <= brojac[i]; j++){
+			niz[x] = i;
+			x++;
+		}
+	}
+	
+	document.getElementById("nizSortirani").innerHTML = niz.join("-");
+	document.getElementById("brojaci").innerHTML = brojac.join("-");
+	
+	//var t2 = new Date();
+	//document.getElementById("verme").innerHTML = t2.getTime()  - t1.getTime();
+}
+
+function jsSort() {
+	//var t1 = new Date();
+	
+	niz.sort(function(a, b){return a - b}); // ugradjena sort js f-ja
+
+	document.getElementById("nizSortirani").innerHTML = niz.join("-");
+
+	//var t2 = new Date();
+	//document.getElementById("verme").innerHTML = t2.getTime() + "<br>" + t1.getTime() + "<br>" + (t2.getTime()  - t1.getTime());
+}
+
+
+</script>
+
+
+</body>
+</html>
