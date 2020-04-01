@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Yamb</title>
+		<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+	</head>
+
+	<body>
+		<div class="okvir1">
+			<p id="zbir"></p>
+			<p id="rezultat"></p>
+			<button onclick=start()>Start</button>
+		</div>
+
+		<div class="okvir">
+			<img class="kockice">
+			<img class="kockice">
+			<img class="kockice">
+			<img class="kockice">
+			<img class="kockice">
+
+			<button onmousedown=startRoll() onmouseup=stopRoll() onmouseout=stopRoll()>ROLL</button>
+		</div>
+		
+		
+
+		<script>
+		var roll = false;
+		var kockice = document.getElementsByClassName("kockice");
+		for(i=0; i<5; i++) {
+			kockice[i].addEventListener("click", birajKockice);
+			kockice[i].style.transform = "none";
+		}
+		
+		start();
+		function start() {
+			document.getElementById("rezultat").innerHTML = "";
+			for(i=0; i<5; i++) {
+				kockice[i].src = "9.png";
+				kockice[i].style.transform = "none";
+			}
+		}
+		
+		function startRoll() {
+			roll = true;
+			Roll();
+		}
+		
+		function stopRoll() {
+			roll = false;
+		}
+		
+		function birajKockice() {
+			if (this.style.transform == "none" && this.src.slice(-5,-4) != "9"){
+				var r = Math.random() * 360 - 180;
+				this.style.transform = "translate(0px,120px) rotate(" + r + "deg)";
+			}
+			else
+				this.style.transform = "none";
+		}
+		
+		function Roll() {
+			for(i=0; i<5; i++)
+				if (kockice[i].style.transform == "none")
+					kockice[i].src = Math.floor(Math.random() * 6 + 1) + ".png";
+
+			if (roll) {
+				setTimeout(Roll, 50);
+			}
+			else {
+				var x=0;
+				var zbir = 0;
+				for (i=0; i<5; i++)
+					zbir += parseInt(kockice[i].src.slice(-5));
+
+				for (i=0; i<4; i++)
+					for (j=i+1; j<5; j++)
+						if (kockice[i].src == kockice[j].src)
+							x++;
+				var text;
+				switch(x) {
+					case 0:
+					text = "Nista";
+					if (zbir == 15 || zbir == 20)
+						text = "Kenta";
+					break;
+
+					case 1:
+					text = "Par";
+					break;
+				
+					case 2:
+					text = "Dva para";
+					break;
+					
+					case 3:
+					text = "Triling";
+					break;
+
+					case 4:
+					text = "Ful";
+					break;
+					
+					case 6:
+					text = "Poker";
+					break;
+					
+					case 10:
+					text = "Yamb";
+					break;
+				} 
+				
+				document.getElementById("rezultat").innerHTML = text;
+
+			}
+		}
+
+		</script>
+	</body>
+</html>
