@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Touch enabled jQuery plugin that lets you create beautiful responsive numerous effect slider." />
+	<meta name="author" content="Goran Cojic">
+
+	<title>xySlider</title>
+
+	<link rel="stylesheet" href="style.css">
+	<script src="jquery-3.3.1.js"></script>
+	<script src="xySlider.js"></script>
+</head>
+
+<body>
+
+	<button class="hid-vis">hidden</button>
+	<button class="hid-vis">visible</button>
+	<input type="checkbox" name="drawImg" id="drawImg">
+	<label for="drawImg">drawImg</label>
+	  
+	<div id="xySlider" class="xySlider">
+		<img src="Slike/4gd01.jpg" class="sSlika"/>
+		<img src="Slike/4gd02.jpg" class="sSlika"/>
+		<img src="Slike/4gd03.jpg" class="sSlika"/>
+		<img src="Slike/4gd04.jpg" class="sSlika"/>	
+	</div>
+	
+
+
+	<div id="okvir1">
+		<select id="getTransType" name="transType" size="5">
+			<option value="okvirno" selected >okvirno</option>
+			<option value="box">box</option>
+			<option value="random">random</option>
+		</select>
+
+		<div class="transTypeDiv">
+		</div>
+		
+		<div class="transTypeDiv">
+			<label for="moveX">MoveX:</label>
+			<input type="number" name="moveX" id="moveX" value=0 step=0.5>
+			<br />
+			<label for="moveY">MoveY:</label>
+			<input type="number" name="moveY" id="moveY" value=0 step=0.5>
+			<input type="checkbox" name="np" id="np">
+			<label for="np">xy*0.5</label>
+			<br />
+			<input type="checkbox" name="skupiX" id="skupiX">
+			<label for="skupiX">SkupiX</label>
+			<input type="checkbox" name="skupiY" id="skupiY">
+			<label for="skupiY">SkupiY</label>
+			<table id="moveBox">
+			<tr><td>LT</td><td>T</td><td>RT</td></tr>
+			<tr><td>L</td><td>C</td><td>R</td></tr>
+			<tr><td>LB</td><td>B</td><td>RB</td></tr>
+			</table>
+		</div>
+		
+		<div class="transTypeDiv">
+			<input type="checkbox" name="ro" id="ro">
+			<label for="ro">Na okvir</label>
+		</div>		
+
+		<select id="getClassType" name="classType" size="5">
+			<option value="talasi" selected>talasi</option>
+			<option value="single">single</option>
+			<option value="random">random</option>
+		</select>
+
+		<div class="classTypeDiv">
+			<table id="smerTalas">
+				<tr><td>LT</td><td>T</td><td>RT</td></tr>
+				<tr><td>L</td><td>C</td><td>R</td></tr>
+				<tr><td>LB</td><td>B</td><td>RB</td></tr>
+			</table>
+		</div>
+		
+		<div class="classTypeDiv">
+			<label for="prvi"> Prvi:</label>
+			<input type="number" name="prvi" id="prvi" value=1>
+			<label for="skok"> Skok:</label>
+			<input type="number" name="skok" id="skok" value=1>
+		</div>
+		
+		<div class="classTypeDiv">
+			<label for="grupa"> Grupa:</label>
+			<input type="number" name="grupa" id="grupa" value=1>
+		</div>
+
+		<input type="checkbox" name="kk" id="kk">
+		<label for="kk">KlaseUnazad</label>
+
+	</div>
+
+	<div id="okvir2">
+		<input id="tTotal" type="number" value=3 />
+		<input id="tClass" type="number" value=1 />
+		<input id="deliX" type="number" value=8 />
+		<input id="deliY" type="number" value=6 />
+
+		<label for="rt"> Rotate:</label>
+		<input type="number" name="rt" id="rt" value=0 step=90>
+		
+		<input type="checkbox" name="sc" id="sc">
+		<label for="sc">Scale</label>
+		
+		<input type="checkbox" name="op" id="op">
+		<label for="op">Opacity</label>
+		
+		<button id="next">Next</button>
+		
+		<label> Rotate3D:</label>
+		<input type="number" name="rtX" id="rtX" value=0 step=1>	
+		<input type="number" name="rtY" id="rtY" value=0 step=1>
+		<input type="number" name="rtZ" id="rtZ" value=0 step=1>	
+		<input type="number" name="rtDEG" id="rtDEG" value=90 step=10>	
+	</div>
+	
+	<textarea id="sliderSettings" rows="12" cols="80"></textarea>
+	<button id="copyButton">Copy</button>
+
+	<p id="info01"></p>
+
+	
+	<script>
+		var rbSlike = 0;
+		
+		$(document).ready(function() {
+
+			$('#xySlider').xySlider({
+				TransType: 'okvirno',
+				talasi: ['L', 'T', 'B', 'R'],
+				klaseUnazad: true,
+				deliX: $("#deliX").val(),
+				deliY: $("#deliY").val()
+			});
+			osveziClickPieces();			
+
+			$("#next").click(function() {
+				drawsliderSettings();
+				
+				var talasiArr = [];
+				$('#smerTalas td').each(function(index) {
+					if($(this).css("background-color") == "rgb(255, 255, 0)")
+						talasiArr.push($(this).text());
+				});
+
+				$('#xySlider').xySlider({
+					TransType: $('#getTransType').val(),
+					ClassType: $('#getClassType').val(),
+					deliX: $("#deliX").val(),
+					deliY: $("#deliY").val(),
+					tTotal: $('#tTotal').val(),
+					tClass: $('#tClass').val(),
+					klaseUnazad: $('#kk').is(':checked'),
+					piecesOpacity: $('#op').is(':checked'),
+					piecesScale: $('#sc').is(':checked'),
+					piecesRotate: $('#rt').val(),					
+					boxMoveX: $('#moveX').val(),
+					boxMoveY: $('#moveY').val(),
+					boxSkupiX: $('#skupiX').is(':checked'),
+					boxSkupiY: $('#skupiY').is(':checked'),					
+					randomNaOkvir: $('#ro').is(':checked'),
+					talasi: talasiArr,
+					prviSingle: $('#prvi').val(),
+					skokSingle: $('#skok').val(),
+					grupaRandom: $('#grupa').val()
+				});
+				osveziClickPieces();
+			});
+/*			
+	$("#xySlider").on('transitionend', function () {
+				$('#xySlider').css({backgroundImage: 'url("Slike/4gd0' + rbSlike + '.jpg")'});
+				rbSlike = (rbSlike + 1) % 4;
+				//alert($(this).index());
+	});			
+*/	
+
+
+			function drawsliderSettings() {
+				var talasiArr = [];
+				$('#smerTalas td').each(function(index) {
+					if(index !=4 && $(this).css("background-color") == "rgb(255, 255, 0)")
+						talasiArr.push("'" + $(this).text() + "'");
+				});
+				
+				text = "$('#xySlider').xySlider({";
+				text += "\n\tTransType: '" + $('#getTransType').val() + "',";
+				text += "\n\tClassType: '" + $('#getClassType').val() + "',";
+				text += "\n\tdeliX: " + $('#deliX').val() + ",";
+				text += "\n\tdeliY: " + $('#deliY').val() + ",";
+				text += "\n\ttTotal: " + $('#tTotal').val() + ",";
+				text += "\n\ttClass: " + $('#tClass').val() + ",";
+				if ($('#kk').is(':checked')) text += "\n\tklaseUnazad: " + $('#kk').is(':checked') + ",";
+				if ($('#op').is(':checked')) text += "\n\tpiecesOpacity: " + $('#op').is(':checked') + ",";
+				if ($('#sc').is(':checked')) text += "\n\tpiecesScale: " + $('#sc').is(':checked') + ",";
+				if ($('#rt').val() != 0) text += "\n\tpiecesRotate: " + $('#rt').val() + ",";
+				if (talasiArr.length != 0) text += "\n\ttalasi: [" + talasiArr.join(', ') + "],";
+				text += "\n});";
+				$('#sliderSettings').text(text);
+			}
+			
+			function osveziClickPieces() {
+				$(".pieces").click(function() {
+					$('#moveX').val($('.pieces').index(this) % $('#deliX').val());	
+					$('#moveY').val(~~($('.pieces').index(this) / $('#deliX').val()));
+				});				
+			}
+			
+			$(".hid-vis").click(function() {
+				$('#xySlider').css({overflow: $(this).text()});
+			});
+
+
+			$('.transTypeDiv').hide();
+			$('.transTypeDiv').eq($('#getTransType option:selected').index()).show(300);
+			$("#getTransType").change(function() {
+				$('.transTypeDiv').hide(300);
+				$('.transTypeDiv').eq($('#getTransType option:selected').index()).show(300);
+			});
+			
+			$('#moveBox').val('C');
+			$('#moveBox td').eq(4).css({backgroundColor: "yellow"});
+			$("#moveBox td").click(function() {
+				$(this).css({backgroundColor: "yellow"});
+				setTimeout(function(){
+					$("#moveBox td").css({backgroundColor: "white"});
+				}, 1000);
+
+				smerX = 0;
+				smerY = 0;
+				mesto = $(this).text();
+
+				if(mesto.includes("L")) smerX = -1;
+				if(mesto.includes("R")) smerX = 1;
+				if(mesto.includes("T")) smerY = -1;
+				if(mesto.includes("B")) smerY = 1;
+				moveX = smerX * $('#deliX').val();
+				moveY = smerY * $('#deliY').val();				
+				if($('#np').is(':checked')){
+					moveX = smerX * 0.5;
+					moveY = smerY * 0.5;
+				}
+				if($('#skupiX').is(':checked')){
+					moveX = (smerX + 1) * (+$('#deliX').val() + 1)/2 - 1;
+				}
+				if($('#skupiY').is(':checked')){
+					moveY = (smerY + 1) * (+$('#deliY').val() + 1)/2 - 1;
+				}
+
+
+				$('#moveX').val(moveX);
+				$('#moveY').val(moveY);
+				
+			});		
+			
+
+			
+			$('.classTypeDiv').hide();
+			$('.classTypeDiv').eq($('#getClassType option:selected').index()).show(300);
+			$("#getClassType").change(function() {
+				$('.classTypeDiv').hide(300);
+				$('.classTypeDiv').eq($('#getClassType option:selected').index()).show(300);
+			});
+
+			
+			$('#smerTalas').val('C');
+			$('#smerTalas td').eq(4).css({backgroundColor: "yellow"});
+			$("#smerTalas td").click(function() {
+				$('#smerTalas').val($(this).text());
+				if($(this).text() == "C")
+					$("#smerTalas td").css({backgroundColor: "white"});
+				else
+					$('#smerTalas td').eq(4).css({backgroundColor: "white"});
+				
+				$(this).css({backgroundColor: "yellow"});
+			});		
+
+		
+			$("#rtX, #rtY, #rtZ, #rtDEG").change(function() {
+				$(".pieces").css({transform: " rotate3d(" + $("#rtX").val() + ", " + $("#rtY").val() + ", " + $("#rtZ").val() + ", " + $("#rtDEG").val() + "deg)"});
+			});
+
+
+			$('#copyButton').click(function(){
+				$(this).siblings('#sliderSettings').select();      
+				document.execCommand("copy");
+				$('#tTotal').select(); 
+			});
+			
+		});
+		
+	</script>
+
+</body>
+</html>
