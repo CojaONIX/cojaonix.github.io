@@ -49,11 +49,6 @@
 			var aMax = 1;
 			var ii, jj;
 			var rot = (settings.piecesRotate != 0) ? "rotate(" + settings.piecesRotate + "deg)" : "";
-			//if($('#rtX').val()!=0) rot += " rotateX(" + $('#rtX').val() + "deg)";
-			//if($('#rtY').val()!=0) rot += " rotateY(" + $('#rtY').val() + "deg)";
-			//if($('#rtZ').val()!=0) rot += " rotateZ(" + $('#rtZ').val() + "deg)";
-			rot +=  " rotate3d(" + $("#rtX").val() + ", " + $("#rtY").val() + ", " + $("#rtZ").val() + ", " + $("#rtDEG").val() + "deg)";
-			
 			var	sca = settings.piecesScale ? "scale(0)" : "";
 
 			if(settings.piecesOpacity)

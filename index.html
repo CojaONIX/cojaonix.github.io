@@ -113,11 +113,6 @@
 		
 		<button id="next">Next</button>
 		
-		<label> Rotate3D:</label>
-		<input type="number" name="rtX" id="rtX" value=0 step=1>	
-		<input type="number" name="rtY" id="rtY" value=0 step=1>
-		<input type="number" name="rtZ" id="rtZ" value=0 step=1>	
-		<input type="number" name="rtDEG" id="rtDEG" value=90 step=10>	
 	</div>
 	
 	<textarea id="sliderSettings" rows="12" cols="80"></textarea>
@@ -171,14 +166,11 @@
 					grupaRandom: $('#grupa').val()
 				});
 				osveziClickPieces();
-			});
-/*			
-	$("#xySlider").on('transitionend', function () {
+
 				$('#xySlider').css({backgroundImage: 'url("Slike/4gd0' + rbSlike + '.jpg")'});
 				rbSlike = (rbSlike + 1) % 4;
-				//alert($(this).index());
-	});			
-*/	
+
+			});
 
 
 			function drawsliderSettings() {
@@ -280,10 +272,6 @@
 				$(this).css({backgroundColor: "yellow"});
 			});		
 
-		
-			$("#rtX, #rtY, #rtZ, #rtDEG").change(function() {
-				$(".pieces").css({transform: " rotate3d(" + $("#rtX").val() + ", " + $("#rtY").val() + ", " + $("#rtZ").val() + ", " + $("#rtDEG").val() + "deg)"});
-			});
 
 
 			$('#copyButton').click(function(){
