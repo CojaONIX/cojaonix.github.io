@@ -184,7 +184,7 @@
 					a = i * deliX + j;
 					ctx = $('.pieces')[a].getContext('2d');
 					if($('#drawImg').is(':checked')) {						
-						ctx.drawImage($('.sSlika')[rbSlike], j * parceW, i * parceH, parceW, parceH, 0, 0, parceW, parceH);
+						ctx.drawImage($('#xySlider img')[rbSlike], j * parceW, i * parceH, parceW, parceH, 0, 0, parceW, parceH);
 					}else {
 						ctx.fillStyle = "#" + Math.floor(Math.random()*16777215).toString(16);
 						ctx.fillRect(0, 0, parceW, parceH);

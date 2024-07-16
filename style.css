@@ -1,4 +1,4 @@
-.xySlider {
+#xySlider {
 	width: 580px;
 	height: 210px;
 	border: 10px solid gray;
@@ -7,17 +7,18 @@
 	
 	display: flex;
 	flex-wrap: wrap;
-	
-	perspective: 200px;
-
 }
 
-.sSlika {
+#xySlider img {
 	display: none;
 }
 
 input[type=number]{
 	width: 50px;
+}
+
+table {
+	margin: 0px 10px;
 }
 
 td {
@@ -26,17 +27,12 @@ td {
 }
 
 #okvir1 {
-	width: 800px;
-	margin: 5px;
+	margin: 25px;
 	display: flex;
 }
 
 select {
-	width: 80px;
-	margin: 0px 10px;
-}
-
-table {
+	width: 100px;
 	margin: 0px 10px;
 }
 

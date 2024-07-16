@@ -9,116 +9,130 @@
 
 	<title>xySlider</title>
 
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
 	<link rel="stylesheet" href="style.css">
-	<script src="jquery-3.3.1.js"></script>
 	<script src="xySlider.js"></script>
+
 </head>
 
 <body>
 
-	<button class="hid-vis">hidden</button>
-	<button class="hid-vis">visible</button>
-	<input type="checkbox" name="drawImg" id="drawImg">
-	<label for="drawImg">drawImg</label>
-	  
-	<div id="xySlider" class="xySlider">
-		<img src="Slike/4gd01.jpg" class="sSlika"/>
-		<img src="Slike/4gd02.jpg" class="sSlika"/>
-		<img src="Slike/4gd03.jpg" class="sSlika"/>
-		<img src="Slike/4gd04.jpg" class="sSlika"/>	
-	</div>
-	
+	<div class="container">
 
+		<button class="hid-vis">hidden</button>
+		<button class="hid-vis">visible</button>
+		<input type="checkbox" name="drawImg" id="drawImg">
+		<label for="drawImg">drawImg</label>
 
-	<div id="okvir1">
-		<select id="getTransType" name="transType" size="5">
-			<option value="okvirno" selected >okvirno</option>
-			<option value="box">box</option>
-			<option value="random">random</option>
-		</select>
-
-		<div class="transTypeDiv">
+		<hr>
+		
+		<div id="xySlider">
+			<img src="images/4gd01.jpg" />
+			<img src="images/4gd02.jpg" />
+			<img src="images/4gd03.jpg" />
+			<img src="images/4gd04.jpg" />	
 		</div>
 		
-		<div class="transTypeDiv">
-			<label for="moveX">MoveX:</label>
-			<input type="number" name="moveX" id="moveX" value=0 step=0.5>
-			<br />
-			<label for="moveY">MoveY:</label>
-			<input type="number" name="moveY" id="moveY" value=0 step=0.5>
-			<input type="checkbox" name="np" id="np">
-			<label for="np">xy*0.5</label>
-			<br />
-			<input type="checkbox" name="skupiX" id="skupiX">
-			<label for="skupiX">SkupiX</label>
-			<input type="checkbox" name="skupiY" id="skupiY">
-			<label for="skupiY">SkupiY</label>
-			<table id="moveBox">
-			<tr><td>LT</td><td>T</td><td>RT</td></tr>
-			<tr><td>L</td><td>C</td><td>R</td></tr>
-			<tr><td>LB</td><td>B</td><td>RB</td></tr>
-			</table>
+		<hr>
+
+		<div>
+			<input id="tTotal" type="number" value=3 />
+			<input id="tClass" type="number" value=1 />
+			<input id="deliX" type="number" value=8 />
+			<input id="deliY" type="number" value=6 />
+
+			<input type="checkbox" name="sc" id="sc">
+			<label for="sc">Scale</label>
+			
+			<input type="checkbox" name="op" id="op">
+			<label for="op">Opacity</label>
+
+			<label for="rt"> Rotate:</label>
+			<input type="number" name="rt" id="rt" value=0 step=90>
+
+			<input type="checkbox" name="kk" id="kk">
+			<label for="kk">KlaseUnazad</label>
+			
+			<button id="next" class="btn btn-primary">Next</button>
+			
 		</div>
-		
-		<div class="transTypeDiv">
-			<input type="checkbox" name="ro" id="ro">
-			<label for="ro">Na okvir</label>
-		</div>		
 
-		<select id="getClassType" name="classType" size="5">
-			<option value="talasi" selected>talasi</option>
-			<option value="single">single</option>
-			<option value="random">random</option>
-		</select>
+		<hr>
 
-		<div class="classTypeDiv">
-			<table id="smerTalas">
+		<div id="okvir1">
+			<select id="getTransType" name="transType" size="5">
+				<option value="okvirno" selected >okvirno</option>
+				<option value="box">box</option>
+				<option value="random">random</option>
+			</select>
+
+			<div class="transTypeDiv">
+			</div>
+			
+			<div class="transTypeDiv">
+				<label for="moveX">MoveX:</label>
+				<input type="number" name="moveX" id="moveX" value=0 step=0.5>
+				<br />
+				<label for="moveY">MoveY:</label>
+				<input type="number" name="moveY" id="moveY" value=0 step=0.5>
+				<input type="checkbox" name="np" id="np">
+				<label for="np">xy*0.5</label>
+				<br />
+				<input type="checkbox" name="skupiX" id="skupiX">
+				<label for="skupiX">SkupiX</label>
+				<input type="checkbox" name="skupiY" id="skupiY">
+				<label for="skupiY">SkupiY</label>
+				<table id="moveBox">
 				<tr><td>LT</td><td>T</td><td>RT</td></tr>
 				<tr><td>L</td><td>C</td><td>R</td></tr>
 				<tr><td>LB</td><td>B</td><td>RB</td></tr>
-			</table>
-		</div>
-		
-		<div class="classTypeDiv">
-			<label for="prvi"> Prvi:</label>
-			<input type="number" name="prvi" id="prvi" value=1>
-			<label for="skok"> Skok:</label>
-			<input type="number" name="skok" id="skok" value=1>
-		</div>
-		
-		<div class="classTypeDiv">
-			<label for="grupa"> Grupa:</label>
-			<input type="number" name="grupa" id="grupa" value=1>
+				</table>
+			</div>
+			
+			<div class="transTypeDiv">
+				<input type="checkbox" name="ro" id="ro">
+				<label for="ro">Na okvir</label>
+			</div>		
+
+			<select id="getClassType" name="classType" size="5">
+				<option value="talasi" selected>talasi</option>
+				<option value="single">single</option>
+				<option value="random">random</option>
+			</select>
+
+			<div class="classTypeDiv">
+				<table id="smerTalas">
+					<tr><td>LT</td><td>T</td><td>RT</td></tr>
+					<tr><td>L</td><td>C</td><td>R</td></tr>
+					<tr><td>LB</td><td>B</td><td>RB</td></tr>
+				</table>
+			</div>
+			
+			<div class="classTypeDiv">
+				<label for="prvi"> Prvi:</label>
+				<input type="number" name="prvi" id="prvi" value=1>
+				<label for="skok"> Skok:</label>
+				<input type="number" name="skok" id="skok" value=1>
+			</div>
+			
+			<div class="classTypeDiv">
+				<label for="grupa"> Grupa:</label>
+				<input type="number" name="grupa" id="grupa" value=1>
+			</div>
+
 		</div>
 
-		<input type="checkbox" name="kk" id="kk">
-		<label for="kk">KlaseUnazad</label>
+		<hr>
+		
+		<textarea id="sliderSettings" rows="12" cols="80"></textarea>
+		<button id="copyButton" class="btn btn-outline-warning">Copy</button>
+
+		<p id="info01"></p>
 
 	</div>
-
-	<div id="okvir2">
-		<input id="tTotal" type="number" value=3 />
-		<input id="tClass" type="number" value=1 />
-		<input id="deliX" type="number" value=8 />
-		<input id="deliY" type="number" value=6 />
-
-		<label for="rt"> Rotate:</label>
-		<input type="number" name="rt" id="rt" value=0 step=90>
-		
-		<input type="checkbox" name="sc" id="sc">
-		<label for="sc">Scale</label>
-		
-		<input type="checkbox" name="op" id="op">
-		<label for="op">Opacity</label>
-		
-		<button id="next">Next</button>
-		
-	</div>
-	
-	<textarea id="sliderSettings" rows="12" cols="80"></textarea>
-	<button id="copyButton">Copy</button>
-
-	<p id="info01"></p>
 
 	
 	<script>
@@ -167,7 +181,7 @@
 				});
 				osveziClickPieces();
 
-				$('#xySlider').css({backgroundImage: 'url("Slike/4gd0' + rbSlike + '.jpg")'});
+				//$('#xySlider').css({backgroundImage: 'url("images/4gd0' + rbSlike + '.jpg")'});
 				rbSlike = (rbSlike + 1) % 4;
 
 			});
@@ -251,7 +265,6 @@
 			});		
 			
 
-			
 			$('.classTypeDiv').hide();
 			$('.classTypeDiv').eq($('#getClassType option:selected').index()).show(300);
 			$("#getClassType").change(function() {
@@ -273,11 +286,9 @@
 			});		
 
 
-
 			$('#copyButton').click(function(){
 				$(this).siblings('#sliderSettings').select();      
 				document.execCommand("copy");
-				$('#tTotal').select(); 
 			});
 			
 		});
